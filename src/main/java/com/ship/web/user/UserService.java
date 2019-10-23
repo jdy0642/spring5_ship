@@ -1,8 +1,6 @@
-package com.ship.web.services;
+package com.ship.web.user;
 import java.util.List;
 import org.springframework.stereotype.Component;
-
-import com.ship.web.user.User;
 @Component
 public interface UserService {
 

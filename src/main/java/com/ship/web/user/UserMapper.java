@@ -1,5 +1,9 @@
 package com.ship.web.user;
 
-public class UserMapper {
+import org.springframework.stereotype.Repository;
 
+@Repository
+public interface UserMapper {
+	public void insertUser(User user);
+	public User selectByIdPw(User user);
 }
