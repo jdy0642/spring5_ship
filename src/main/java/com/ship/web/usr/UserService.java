@@ -1,4 +1,4 @@
-package com.ship.web.user;
+package com.ship.web.usr;
 import java.util.List;
 import org.springframework.stereotype.Component;
 @Component

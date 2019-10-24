@@ -1,4 +1,4 @@
-package com.ship.web.config;
+package com.ship.web.ctx;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.ship.web"})
-public class ServletConfig implements WebMvcConfigurer {
+public class ServletContext implements WebMvcConfigurer {
 	@Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver bean =  new InternalResourceViewResolver();

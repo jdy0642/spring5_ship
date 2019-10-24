@@ -1,5 +1,5 @@
 package com.ship.web.lambda;
-import com.ship.web.user.User;
+import com.ship.web.usr.User;
 
 public class GenericTest {
 

@@ -1,4 +1,4 @@
-package com.ship.web.user;
+package com.ship.web.usr;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;

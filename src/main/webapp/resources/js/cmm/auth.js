@@ -36,7 +36,7 @@ auth = (()=>{
                    e.preventDefault();
                    let data = {uid : $('#uid').val(), upw : $('#upw').val(), uname: $('#uname').val()}
                   $.ajax({
-                     url : _+'/user/join',
+                     url : _+'/users/',
                      type : 'POST',
                      dataType : 'json',
                      data : JSON.stringify(data),
@@ -72,7 +72,7 @@ auth = (()=>{
                  alert('로그인 ');
                  let data = {uid : $('#uid').val(), upw : $('#upw').val(), uname:$('#uname').val()}
                  $.ajax({
-                    url: _+'/user/login',
+                    url: _+'/users/{uid}',
                     data:JSON.stringify(data),
                     type:'POST',
                     dataType: 'json',

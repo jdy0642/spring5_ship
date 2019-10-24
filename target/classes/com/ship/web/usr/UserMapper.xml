@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ship.web.usr.UserMapper">
+
+    <select id="selectUserByIdPw" resultType="User" parameterType="com.ship.web.usr.User" >
+        SELECT * FROM USER WHERE USER_ID LIKE #{uid} AND USER_PW LIKE #{upw}
+    </select>
+    
+    <insert id="insertUser" parameterType="com.ship.web.usr.User" >
+        INSERT INTO USER (USER_ID, USER_PW, USER_NAME) VALUES (
+            #{uid}, #{upw}, #{uname}
+        )
+    </insert>
+
+</mapper>

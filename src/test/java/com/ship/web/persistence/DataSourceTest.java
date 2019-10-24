@@ -5,10 +5,12 @@ import javax.sql.DataSource;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import com.ship.web.config.RootConfig;
+
+import com.ship.web.ctx.RootContext;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-@ContextConfiguration(classes = {RootConfig.class})
+@ContextConfiguration(classes = {RootContext.class})
 @Log4j
 public class DataSourceTest {
 	@Setter (onMethod_ = {@Autowired})
