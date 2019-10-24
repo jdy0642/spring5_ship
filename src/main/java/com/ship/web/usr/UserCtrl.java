@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ship.web.cmm.IConsumer;
 import com.ship.web.cmm.IFunction;
+import com.ship.web.cmm.IPredicate;
 import com.ship.web.utl.Printer;
 
 @RestController
@@ -23,36 +24,52 @@ public class UserCtrl {
 	@Autowired Printer printer;
 	@Autowired Map <String, Object> map;
 	@Autowired UserMapper userMapper;
- 	
+	
 	@PostMapping("/")
-	public String join(@RequestBody User param) {
-		logger.info("ajax1가 보낸 아이디 비번{}",param.getUid()+","+param.getUpw()+","+param.getUname());
+	public Map<?,?> join(@RequestBody User param) {
+		printer.accept("join 들어옴");
 		IConsumer<User> c = t -> userMapper.insertUser(param);
 		c.accept(param);
-		return "SUCCESS";
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
 		};
+
+		@GetMapping("/{uid}/exist")
+		public Map<?,?> existId(@PathVariable String uid){
+			IFunction<String, Integer> f = t -> userMapper.existId(uid);
+			map.clear();
+				map.put("msg", f.apply(uid)==0 ? "SUCCESS" : "FAIL");
+			return map;
+		}
 	
 	@PostMapping("/{uid}")
 	public User login(@PathVariable String uid, @RequestBody User param) {
 		logger.info("ajax2가 보낸 아이디 비번{}",param.getUid()+","+param.getUpw());
 		IFunction<User, User> f = t -> userMapper.selectUserByIdPw(param);
+		logger.info("ajax2가 보낸 아이디 비번{}",param.getUid()+","+f.apply(param));
 		return f.apply(param);
 	}
+	
 	@GetMapping("/{uid}")
 	public User searchUserById(@PathVariable String uid, @RequestBody User param) {
 		IFunction<User, User> f = t -> userMapper.selectUserByIdPw(param);
 		return f.apply(param);
 	}
 	@PutMapping("/{uid}")
-	public String updateUser(@PathVariable String uid, @RequestBody User param) {
+	public Map<?,?> updateUser(@PathVariable String uid, @RequestBody User param) {
 		IConsumer<User> c = t -> userMapper.selectUserByIdPw(param);
 		c.accept(param);
-		return "SUCCESS";
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
 	}
 	@DeleteMapping("/{uid}")
-	public String removeUser(@PathVariable String uid, @RequestBody User param) {
+	public Map<?,?> removeUser(@PathVariable String uid, @RequestBody User param) {
 		IConsumer<User> c = t -> userMapper.selectUserByIdPw(param);
 		c.accept(param);
-		return "SUCCESS";
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
 	}
 };

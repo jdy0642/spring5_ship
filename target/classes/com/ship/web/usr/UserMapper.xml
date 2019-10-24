@@ -4,14 +4,21 @@
 
 <mapper namespace="com.ship.web.usr.UserMapper">
 
-    <select id="selectUserByIdPw" resultType="User" parameterType="com.ship.web.usr.User" >
-        SELECT * FROM USER WHERE USER_ID LIKE #{uid} AND USER_PW LIKE #{upw}
+    <select id="selectUserByIdPw" resultType="User" parameterType="User" >
+        SELECT USER_ID uid , USER_PW upw, USER_NAME uname
+        FROM USER 
+        WHERE USER_ID LIKE #{uid} AND USER_PW LIKE #{upw}
     </select>
     
-    <insert id="insertUser" parameterType="com.ship.web.usr.User" >
+    <insert id="insertUser" parameterType="User" >
         INSERT INTO USER (USER_ID, USER_PW, USER_NAME) VALUES (
             #{uid}, #{upw}, #{uname}
         )
     </insert>
-
+  
+ <select id="existId" resultType="Integer" parameterType="String" >
+          SELECT COUNT(*)
+			FROM USER
+			WHERE USER_ID LIKE #{uid} 
+    </select>
 </mapper>

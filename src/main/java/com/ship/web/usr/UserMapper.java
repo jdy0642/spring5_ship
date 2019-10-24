@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 	public void insertUser(User user);
 	public User selectUserByIdPw(User user);
+	public int existId(String uid);
 	
 }
