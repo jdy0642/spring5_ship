@@ -39,7 +39,7 @@ public class UserCtrl {
 		public Map<?,?> existId(@PathVariable String uid){
 			IFunction<String, Integer> f = t -> userMapper.existId(uid);
 			map.clear();
-				map.put("msg", f.apply(uid)==0 ? "SUCCESS" : "FAIL");
+			map.put("msg", f.apply(uid)==0 ? "SUCCESS" : "FAIL");
 			return map;
 		}
 	
@@ -47,7 +47,7 @@ public class UserCtrl {
 	public User login(@PathVariable String uid, @RequestBody User param) {
 		logger.info("ajax2가 보낸 아이디 비번{}",param.getUid()+","+param.getUpw());
 		IFunction<User, User> f = t -> userMapper.selectUserByIdPw(param);
-		logger.info("ajax2가 보낸 아이디 비번{}",param.getUid()+","+f.apply(param));
+		logger.info("ajax2가 보낸 아이디 비번{}",f.apply(param));
 		return f.apply(param);
 	}
 	

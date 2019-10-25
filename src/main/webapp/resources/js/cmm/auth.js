@@ -2,17 +2,22 @@
 var auth = auth || {};
 auth = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-	let _,js, auth_vue_js, brd_vue_js;
+	let _,js, auth_vue_js, brd_vue_js, brd_js;
 	
 	let init =()=>{
 		_=$.ctx()
 		js=$.js()
 		auth_vue_js= js+'/vue/auth_vue.js'
 		brd_vue_js=js+'/vue/brd_vue.js'
+		brd_js=js+'/brd/brd.js'
 	}
 	 let onCreate =()=>{
          init()
-         	$.getScript(auth_vue_js).done(()=>{
+         $.when(()=>{
+        	 $.getScript(auth_vue_js)
+         })
+         	
+         	.done(()=>{
          		setContentView()
          		$('#a_go_join').click(e=>{
          			e.preventDefault()
@@ -23,6 +28,11 @@ auth = (()=>{
          	
            }
 	 let setContentView =()=>{
+		 let x = {css:$.css(), img: $.img()}
+         $('head').html(auth_vue.login_head(x))
+         $('body')
+         .addClass('text-center')
+         .html(auth_vue.login_body(x))
 		login()
 	 }
 	 
@@ -30,7 +40,27 @@ auth = (()=>{
 	 let join=()=>{
 		 $('head').html(auth_vue.join_head())
          $('body').html(auth_vue.join_body())
-         existId()
+         $('#uid').keyup(()=>{
+        	 if($('#uid').val().length>3)
+        		 $.ajax({
+                     url: _+'/users/'+$('#uid').val()+'/exist',
+                     contentType: 'application/json',
+                     success :d => {
+                  	   if(d.msg === 'SUCCESS')
+                  		   $('#dupl_check')
+                  		   		.val('사용가능한 ID입니다')
+                  		   		.css('color','green')
+                     		else(
+                     		$('#dupl_check')
+                       		   	.val('사용불가능한 ID입니다')
+                       		   	.css('color','red')
+                     		)
+                     },
+                     error :e =>{
+                     	alert('ajax 실패 ')
+                     }
+                  })
+         });
          $('<button>',{
                 text: '회원가입 완료하기',
                 href: '#',
@@ -46,9 +76,12 @@ auth = (()=>{
                      success : d => {
                         alert('ajax 성공 : '+d.msg)
                         if(d.msg === 'SUCCESS')
-                        login()
-                        else
+                        	{
+                        	login()
+                        	}
+                        else{
                         	alert('회원가입 실패')
+                        }
                         
                      },
                      error : e => {
@@ -64,11 +97,7 @@ auth = (()=>{
 	 
 	 
 	 let login=()=>{
-		 let x = {css:$.css(), img: $.img()}
-         $('head').html(auth_vue.login_head(x))
-         $('body')
-         .addClass('text-center')
-         .html(auth_vue.login_body(x))
+		 
 		  $('<button>',{
               type : "submit",
               text : "login",
@@ -84,7 +113,9 @@ auth = (()=>{
                     contentType: 'application/json',
                     success :d => {
                     	alert(d.uname+' 님 환영합니다')
-                    	mypage()
+                    	$.getScript(brd_js, ()=>{
+                    		brd.onCreate()
+                    	})
                     },
                     error :e =>{
                     	alert('로그인 실패')
@@ -95,10 +126,6 @@ auth = (()=>{
            .appendTo('#btn_login')
          }
 	 
-	 let myPage =() => {
-		 $('head').html(brd_vue.brd_head())
-		 $('body').html(brd_vue.brd_body())
-	 }
 	 
 	 let existId =()=>{
 		 $('<button>',{
@@ -127,6 +154,6 @@ auth = (()=>{
 	 }
 	 
 	 
-           return{onCreate, join, login, existId, myPage}
+           return{onCreate}
         })();
 

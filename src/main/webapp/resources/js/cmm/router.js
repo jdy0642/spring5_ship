@@ -10,5 +10,14 @@ function Session(x) {
 		img: () => {return sessionStorage.getItem('img');},
 		css: () => {return sessionStorage.getItem('css');}
 	}
-	
+function User(){
+		sessionStorage.setItem('uid',uid);
+		sessionStorage.setItem('upw',upw);
+		sessionStorage.setItem('uname',uname);
+		return{
+			uid: ()=>{return sessionStorage.getItem('uid');},
+			upw: ()=>{return sessionStorage.getItem('upw');},
+			uname: ()=>{return sessionStorage.getItem('uname');},
+		}
+}
 }
