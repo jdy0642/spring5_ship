@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ship.web.cmm.IConsumer;
 import com.ship.web.utl.Printer;
 
 @RestController
@@ -25,6 +27,9 @@ public class ArticleCtrl {
 	@PostMapping("/")
 	public Map<?,?> write(@RequestBody Article param) {
 		logger.info("롸이트");
+		param.setBoardtype("게시판");
+		IConsumer<Article> c = t -> articleMapper.insertArticle(param);
+		c.accept(param);
 		map.clear();
 		map.put("msg", "SUCCESS");
 		logger.info("롸이트2");

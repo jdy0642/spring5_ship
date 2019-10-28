@@ -1,9 +1,11 @@
 package com.ship.web.brd;
 
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ArticleMapper {
-	public void insertArticles(Article article);
-	public void selectArticles(Article article);
-	public void updateArticles(Article article);
-	public void deleteArticles(Article article);
+	public void insertArticle(Article param);
+	public void selectArticle(Article param);
+	public void updateArticle(Article param);
+	public void deleteArticle(Article param);
 }

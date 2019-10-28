@@ -6,5 +6,6 @@
     </settings>
     <typeAliases>
        <typeAlias alias="User"  type="com.ship.web.usr.User"/>
+       <typeAlias alias="Article"  type="com.ship.web.brd.Article"/>
     </typeAliases>
 </configuration>

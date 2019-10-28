@@ -56,7 +56,7 @@ brd = (()=>{
 			let json={
 					uid:$('#write_form input[name=writer]').val(),
 					title:$('#write_form input[name=title]').val(),
-					content:$('#write_form textarea').val()
+					content:$('#write_form textarea[name=content]').val()
 			}
 			alert('id'+json.uid)
 			alert('제목'+json.title)
@@ -68,7 +68,7 @@ brd = (()=>{
 				dataType:'json',
 				contentType:'application/json',
 				success:d=>{
-					 alert('ajax1가 보낸 값'+d.uid)
+					 alert('ajax1가 보낸 값'+json.uid)
 					 $('#recent_updates').html('<h1>목록 불러오기</h1>')
 				},
 				error:e=>{
