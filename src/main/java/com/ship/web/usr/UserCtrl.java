@@ -34,7 +34,7 @@ public class UserCtrl {
 		map.put("msg", "SUCCESS");
 		return map;
 		};
-
+	
 		@GetMapping("/{uid}/exist")
 		public Map<?,?> existId(@PathVariable String uid){
 			IFunction<String, Integer> f = t -> userMapper.existId(uid);
