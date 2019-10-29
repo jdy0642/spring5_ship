@@ -9,5 +9,23 @@
              #{uid}, #{boardtype}, #{title}, #{content}
         )
     </insert>
-  
+    
+    <select id="countArticle" resultType="string">
+    		SELECT COUNT(ARTSEQ) FROM ARTICLE 
+    </select>
+    
+    <select id="selectList" resultType="Article">
+    		SELECT BOARD_TYPE AS boardtype, USER_ID AS uid, A.*
+    		FROM ARTICLE A
+    </select>
+  	<delete id ="deleteArticle" parameterType="Article">
+  			DELETE 
+			FROM ARTICLE 
+			WHERE ARTSEQ = #{artseq}
+  	</delete>
+  	<update id="updateArticle" parameterType="Article">
+  			UPDATE ARTICLE 
+			SET CONTENT = #{content}
+			WHERE ARTSEQ = #{artseq};
+  	</update>
 </mapper>
