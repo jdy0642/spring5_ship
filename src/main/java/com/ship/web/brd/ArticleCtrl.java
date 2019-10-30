@@ -36,8 +36,6 @@ public class ArticleCtrl {
 		c.accept(param);
 		map.clear();
 		map.put("msg", "SUCCESS");
-		ISupplier<String> s =()-> articleMapper.countArticle();
-		map.put("count",s.get());
 		logger.info("롸이트2");
 		return map;
 	}

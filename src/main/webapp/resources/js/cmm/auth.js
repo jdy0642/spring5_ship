@@ -36,7 +36,7 @@ auth = (()=>{
 		$('head').html(auth_vue.login_head({css:$.css(), img: $.img()}))
 		$('body').html(auth_vue.login_body({css:$.css(), img: $.img()})).addClass('text-center')
 		login()
-		
+		access()
 	}   			 
 	let join = () =>{
      $('head').html(auth_vue.join_head())
@@ -81,7 +81,6 @@ auth = (()=>{
        				$('head').html(auth_vue.login_head({css:$.css(), img: $.img()}))
        				$('body').html(auth_vue.login_body({css:$.css(), img: $.img()})).addClass('text-center')
        					 login()
-       					 
        				 }
        					 else{
        						 alert('회원가입 실패')
@@ -120,7 +119,6 @@ auth = (()=>{
 							brd.onCreate()
 							}).fail(()=>{
 							alert('when done fail 실패')
-							//
 							})
 							},
            			 error : e => {
@@ -130,6 +128,36 @@ auth = (()=>{
 				}
 			}).addClass("btn btn-primary btn-lg btn-block")
 			.appendTo('#btn_login')
+		}
+		let access = ()=>{
+			$('#a_go_admin').click(e=>{
+				e.preventDefault()
+				let ok = confirm('사원입니까?')
+				if(ok){
+					let aid = prompt('사원번호를 입력하시오')
+					let upw = prompt('비밀번호를 입력하시오')
+					$.ajax({
+						url:_+'/admins/'+aid,
+						data: JSON.stringify({aid:aid,upw:upw}),
+						type:'POST',
+						dataType:'json',
+						contentType:'application/json',
+						success:d=>{
+							alert('사원 액세스 성공')
+							if(d.msg === 'SUCCESS'){
+								alert('어드민 환영합니다')
+								admin.onCreate()
+							}else{
+								alert('접근 권한이 없습니다')
+								app.run(_)
+							}
+						},
+						error:e=>{
+							alert('사원 액세스 실패')
+						}
+					})
+				}
+			})
 		}
 		return{onCreate}
 	

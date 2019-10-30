@@ -1,5 +1,11 @@
 package com.ship.web.adm;
 
-public class AdminMapper {
+import org.springframework.stereotype.Repository;
 
+@Repository
+public interface AdminMapper {
+	public Admin selectByAdminIdPw(Admin param);
+	public void select(Admin param);
+	public void update(Admin param);
+	public void delete(Admin param);
 }
