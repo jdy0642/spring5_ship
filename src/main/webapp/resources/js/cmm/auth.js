@@ -120,6 +120,7 @@ auth = (()=>{
 							brd.onCreate()
 							}).fail(()=>{
 							alert('when done fail 실패')
+							//
 							})
 							},
            			 error : e => {
