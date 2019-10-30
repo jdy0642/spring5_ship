@@ -2,19 +2,26 @@
 var auth = auth || {};
 auth = (()=>{
 	const WHEN_ERR='호출하는 js 파일을 찾을 수 없습니다.';
-   let _,js,auth_vue_js,brd_js,router_js;
+   let _,js,css,img,auth_vue_js,brd_js,router_js,cookie_js;
   
    let init =()=>{
-      _=$.ctx();
-      js=$.js();
-      auth_vue_js = js+'/vue/auth_vue.js';
-      router_js = js+'/cmm/router.js';
-      brd_js = js+'/brd/brd.js';
+      _=$.ctx()
+      js=$.js()
+      css=$.css()
+      img=$.img()
+      auth_vue_js = js+'/vue/auth_vue.js'
+      router_js = js+'/cmm/router.js'
+      brd_js = js+'/brd/brd.js'
+      cookie_js = js + '/cmm/cookie.js'
    }
    
    let onCreate =()=>{
    		init()
-   		$.when($.getScript(auth_vue_js))
+   		$.when(
+   				$.getScript(auth_vue_js),
+   				$.getScript(brd_js),
+   				$.getScript(cookie_js),
+   				$.getScript(router_js))
    		.done(()=>{
    		setContentView()
    		$('#a_go_join').click(e=>{
@@ -107,22 +114,13 @@ auth = (()=>{
 						contentType : 'application/json',
 						success : d =>{
 						$.when(
-						
-							$.getScript(brd_js,$.extend(new User(d))),
-							$.getScript(router_js)
-							
+							setCookie("USER_ID",d.uid),
+							alert('저장된 쿠키'+getCookie("USER_ID"))
 						).done(()=>{
-						
 							brd.onCreate()
-							alert('user세션으로 상속해서 brd onCreate 실행!')
-							
-							}).fail(
-							()=>{
+							}).fail(()=>{
 							alert('when done fail 실패')
-							}		
-							)
-							
-							
+							})
 							},
            			 error : e => {
            				 alert('로그인 실패')

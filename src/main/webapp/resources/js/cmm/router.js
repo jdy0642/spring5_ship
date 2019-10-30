@@ -11,14 +11,3 @@ function Session(x) {
 		css: () => {return sessionStorage.getItem('css');}
 	}
 }
-function User(x){
-		sessionStorage.setItem('uid',x.uid);
-		sessionStorage.setItem('upw',x.upw);
-		sessionStorage.setItem('uname',x.uname);
-	
-		return{
-			uid: ()=>{return sessionStorage.getItem('uid');},
-			upw: ()=>{return sessionStorage.getItem('upw');},
-			uname: ()=>{return sessionStorage.getItem('uname');},
-		}
-}
