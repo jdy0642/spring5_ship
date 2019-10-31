@@ -270,7 +270,8 @@ auth_vue = {
 		'    </style>'+
 		'    <!-- Custom styles for this template -->'+
 		'    <link href="'+x.css+'/signin.css" rel="stylesheet">'+
-		'</head>'+''
+		'    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'+
+		'</head>'
 		},
 	login_body: x=>{
 			return '<body class="text-center">'+

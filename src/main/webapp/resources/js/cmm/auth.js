@@ -2,7 +2,7 @@
 var auth = auth || {};
 auth = (()=>{
 	const WHEN_ERR='호출하는 js 파일을 찾을 수 없습니다.';
-   let _,js,css,img,auth_vue_js,brd_js,router_js,cookie_js;
+   let _,js,css,img,auth_vue_js,brd_js,router_js,cookie_js,adm_js;
   
    let init =()=>{
       _=$.ctx()
@@ -13,12 +13,14 @@ auth = (()=>{
       router_js = js+'/cmm/router.js'
       brd_js = js+'/brd/brd.js'
       cookie_js = js + '/cmm/cookie.js'
+      adm_js = js + '/adm/adm.js'
    }
    
    let onCreate =()=>{
    		init()
    		$.when(
    				$.getScript(auth_vue_js),
+   				$.getScript(adm_js),
    				$.getScript(brd_js),
    				$.getScript(cookie_js),
    				$.getScript(router_js))
@@ -131,22 +133,20 @@ auth = (()=>{
 		}
 		let access = ()=>{
 			$('#a_go_admin').click(e=>{
-				e.preventDefault()
+				adm.onCreate()
+				/*e.preventDefault()
 				let ok = confirm('사원입니까?')
 				if(ok){
 					let aid = prompt('사원번호를 입력하시오')
-					let upw = prompt('비밀번호를 입력하시오')
 					$.ajax({
 						url:_+'/admins/'+aid,
-						data: JSON.stringify({aid:aid,upw:upw}),
+						data: JSON.stringify({aid:aid,upw:prompt('비밀번호를 입력하시오')}),
 						type:'POST',
 						dataType:'json',
 						contentType:'application/json',
 						success:d=>{
-							alert('사원 액세스 성공')
 							if(d.msg === 'SUCCESS'){
-								alert('어드민 환영합니다')
-								admin.onCreate()
+								adm.onCreate()
 							}else{
 								alert('접근 권한이 없습니다')
 								app.run(_)
@@ -156,7 +156,7 @@ auth = (()=>{
 							alert('사원 액세스 실패')
 						}
 					})
-				}
+				}*/
 			})
 		}
 		return{onCreate}
