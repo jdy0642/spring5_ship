@@ -46,7 +46,7 @@ navi = (()=>{
 				e.preventDefault()
 				deleteCookie()
 				app.run(_)
-				alert('로그아웃')
+				
 			},
 			text : '로그아웃'
 		})

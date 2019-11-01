@@ -32,6 +32,7 @@
 		<jackson-databind-version>2.9.9.3</jackson-databind-version>
 		<jackson-version>2.9.8</jackson-version>
 		<HikariCP-version>3.4.0</HikariCP-version>
+		<jsoup-version>1.12.1</jsoup-version>
 		
 	</properties>
 	<dependencies>
@@ -217,6 +218,11 @@
 		      <artifactId>spring-test</artifactId>
 		      <version>5.2.0.RELEASE</version>
 		      <scope>test</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.jsoup</groupId>
+    		<artifactId>jsoup</artifactId>
+    		<version>${jsoup-version}</version>
 		</dependency>
 		        
 	</dependencies>

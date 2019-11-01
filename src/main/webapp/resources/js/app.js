@@ -7,6 +7,7 @@ app = (()=>{
 			()=>{$.extend(new Session(x));
 			onCreate()
 			});
+		
 	let init =()=>{
 		_ =$.ctx()
 		js = $.js()
@@ -21,6 +22,7 @@ app = (()=>{
 		)
 		.done(()=>{
 			auth.onCreate()
+			
 		}
 		)
 		.fail(()=>{

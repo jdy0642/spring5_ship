@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.ship.web.brd.ArticleCtrl;
-import com.ship.web.cmm.IConsumer;
 import com.ship.web.cmm.IFunction;
 import com.ship.web.utl.Printer;
 
@@ -26,7 +23,6 @@ public class AdminCtrl {
 	@Autowired Printer printer;
 	@Autowired Map <String, Object> map;
 	@Autowired AdminMapper adminMapper;
-	@Autowired List<Admin> list;
 	
 	@PostMapping("/{aid}")
 	public Map<?,?> access(@PathVariable String aid, @RequestBody Admin param){

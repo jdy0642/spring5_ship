@@ -73,20 +73,33 @@ adm =(()=>{
 		})
 	}
 	let webCrawl=()=>{
-			$('<h2>Browser Seletcions</h2></br>'+
-				'  <select id="right2" size="1" >'+
-				'  </select>'+
-				'  <br><br>'+
-				'  <input type="text">'+
-				'  <input type="submit">'
+			$('</br></br></br><h2>Web Crawling</h2></br>'+
+				'<form id="crawl_form">'+
+				'  <select name="site" id="right2" size="1" >'+
+				'  </select><br><br>'+
+				   '<input class="form-control mr-sm-2" type="text" placeholder="insert URL for crawling" aria-label="Search">'+
+				'</form>'
 			).appendTo('#right')
+			$('#crawl_form input[class="form-control mr-sm-2"]')
+		.css({width:'80%'})
 		$.each(
-				[{txt:'naver',name:'네이버'},
-				{txt:'google',name:'구글'},
-				{txt:'daum',name:'다음'}],
+				[{sub:'naver.com'},
+				{sub:'google.co.kr'},
+				{sub:'daum.net'}],
 				(i,j)=>{
-			$('<option value="'+j.txt+'">'+j.name+'</option>')
-			.appendTo('#right2')
+			$('<option value="'+j.sub+'">'+j.sub+'</option>')
+			.appendTo('#crawl_form select')
+		})
+		$('<button class="btn btn-secondary my-2 my-sm-0" type="submit">go crawl</button>')
+		.appendTo('#crawl_form')
+		.click(e=>{
+			e.preventDefault()
+			let arr = [$('#crawl_form select[name="site"]').val(),
+						$('#crawl_form input[type="text"]').val()]
+			if(!$.fn.nullchecker(arr)){
+			$.getJSON(_+'/tx/crawling/'+arr[0]+'/'+arr[1],d=>{
+			})
+			}
 		})
 	}
 	return{onCreate}
