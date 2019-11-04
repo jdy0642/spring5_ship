@@ -1,4 +1,5 @@
 package com.ship.web.brd;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ship.web.cmm.IConsumer;
-import com.ship.web.cmm.IFunction;
 import com.ship.web.cmm.ISupplier;
 import com.ship.web.utl.Printer;
 
@@ -49,12 +49,15 @@ public class ArticleCtrl {
 		return map;
 	}
 	
-	@GetMapping("/")
-	public List<Article> list(){
+	@GetMapping("/page/{pageno}")
+	public Map<?,?>  list(@PathVariable String pageno){
 		list.clear();
 		ISupplier<List<Article>> s = () -> articleMapper.selectList();
-		printer.accept("전체 글 목록\n"+s.get());
-		return s.get();
+		printer.accept("해당 페이지\n"+s.get());
+		map.clear();
+		map.put("articles", s.get());
+		map.put("pages", Arrays.asList(1,2,3,4,5));
+		return map;
 	}
 	
 	@PutMapping("/{artseq}")

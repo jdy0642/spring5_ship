@@ -15,8 +15,11 @@
     </select>
     
     <select id="selectList" resultType="Article">
-    		SELECT BOARD_TYPE AS boardtype, USER_ID AS uid, A.*
-    		FROM ARTICLE A
+    SELECT BOARD_TYPE AS boardtype, USER_ID AS uid, A.* FROM
+				(SELECT *
+				 FROM ARTICLE
+	 			 ORDER BY ARTSEQ DESC) A
+ 			LIMIT 0,5
     </select>
   	<delete id ="deleteArticle" parameterType="Article">
   			DELETE 
@@ -25,7 +28,7 @@
   	</delete>
   	<update id="updateArticle" parameterType="Article">
   			UPDATE ARTICLE 
-			SET CONTENT = #{content}
+			SET CONTENT = #{content}, TITLE = #{title}
 			WHERE ARTSEQ = #{artseq};
   	</update>
 </mapper>
