@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	private String uid, upw, uname, age, gender, loc, tel, email, 
-	upoint, score, mvp, win, hitmap, km, heart, author, lolname;
+		upoint, score, mvp, win, hitmap, km, heart, author, lolname;
 }

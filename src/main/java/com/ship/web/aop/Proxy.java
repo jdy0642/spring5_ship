@@ -31,6 +31,7 @@ public class Proxy {
 											.execute();
 			Document document = response.parse();
 			String text = document.text();
+			//String text = document.html();
 			p.accept("크롤링한 텍스트:\n"+text);
 			proxyList.add(text);
 		} catch (Exception e) {

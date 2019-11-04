@@ -1,14 +1,43 @@
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ship.web.adm.AdminMapper">
     
-    <select id="selectByAdminIdPw" resultType="Admin" >
+      <select id="selectByAdminIdPw" resultType="Admin" >
       	SELECT *
       	FROM ADMIN
       	WHERE AID = #{aid} AND UPW = #{upw}
         
     </select>
+    <!-- 
+    <select id="selectAdmin" resultType="Admin" >
+      	SELECT *
+      	FROM ADMIN
+      	
+      	<trim prefix="WHERE" prefixOverrides="AND |OR ">
+      	WHERE AID = #{aid} 
+	      	 <if test="pwd != null">
+		      	 AND UPW = #{upw}
+	      	 </if>
+	      	 <if test="ename != null">
+		      	 AND ENAME = #{ename}
+	      	 </if>
+		</trim>
+    </select>
+    
+    <select id="selectAdmin2" resultType="Admin" parameterType="hashMap">
+      	SELECT *
+      	FROM ADMIN
+      	
+      	<trim prefix="WHERE" prefixOverrides="AND |OR ">
+      		WHERE ${aid} = #{aid} 
+	      	 <if test="pwd != null">
+		      	 AND UPW = #{upw}
+	      	 </if>
+	      	 <if test="ename != null">
+		      	 AND ENAME = #{ename}
+	      	 </if>
+		</trim>
+    </select> -->
  
 </mapper>

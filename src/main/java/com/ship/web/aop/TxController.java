@@ -17,7 +17,7 @@ public class TxController {
 	@Autowired TxService txService; 
 	
 	@GetMapping("/crawling/{site}/{srch}")
-	public void crawling(@PathVariable String site,@PathVariable String srch){
+	public void crawling(@PathVariable String site, @PathVariable String srch){
 		p.accept(site+", srch: "+srch);
 		HashMap<String, String> map = new HashMap<>();
 		map.clear();
