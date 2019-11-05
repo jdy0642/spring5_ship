@@ -14,12 +14,12 @@
     		SELECT COUNT(ARTSEQ) FROM ARTICLE 
     </select>
     
-    <select id="selectList" resultType="Article">
+    <select id="selectList" resultType="Article" parameterType="Proxy">
     SELECT BOARD_TYPE AS boardtype, USER_ID AS uid, A.* FROM
 				(SELECT *
 				 FROM ARTICLE
 	 			 ORDER BY ARTSEQ DESC) A
- 			LIMIT 0,5
+ 			LIMIT #{startRow},#{pageSize}
     </select>
   	<delete id ="deleteArticle" parameterType="Article">
   			DELETE 
@@ -29,6 +29,6 @@
   	<update id="updateArticle" parameterType="Article">
   			UPDATE ARTICLE 
 			SET CONTENT = #{content}, TITLE = #{title}
-			WHERE ARTSEQ = #{artseq};
+			WHERE ARTSEQ = #{artseq}
   	</update>
 </mapper>

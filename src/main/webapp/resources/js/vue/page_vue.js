@@ -3,7 +3,7 @@ var page_vue = page_vue || {}
 page_vue = {
 		page: ()=>{
 			return'<div class="container">'+
-			'  <h2>Pagination</h2>'+
+			'  <h6>Pagination</h6>'+
 			'  <ul id="pagination" class="pagination">'+
 			'    <li class="page-item"><a class="page-link" href="#">Previous</a></li>'+
 			'    <li class="page-item"><a class="page-link" href="#">1</a></li>'+
