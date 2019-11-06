@@ -14,11 +14,14 @@ app = (()=>{
 		css = $.css()
 		img = $.img()
 		authjs = js+'/cmm/auth.js'
+		
 	}
 	let onCreate =()=>{
 		init();
 		$.when(
+			$.getScript(authjs),
 			$.getScript(authjs)
+			
 		)
 		.done(()=>{
 			auth.onCreate()
