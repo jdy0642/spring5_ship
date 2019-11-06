@@ -40,6 +40,7 @@ brd = (()=>{
 		$('#recent_updates .media').remove()
 		$('#suggestions').remove()
 		$('#recent_updates .d-block').remove()
+		$('#recent_updates .container').remove()
 		
 		$.getJSON(_+'/articles/page/'+x.page+'/size/'+x.size,d=>{
 			$.each(d.articles, (i,j)=>{
@@ -72,20 +73,31 @@ brd = (()=>{
 				'  </select>'+
 				'</form><br>')
 				.appendTo('#recent_updates div[class ="container"] h6')
-			$.each([5,10,15],(i,j)=>{
-				$('<option value=>'+j+'개씩보기</option>')
+			$.each([{sub:'5개씩 보기', val:'5'},{sub:'10개씩 보기',val:'10'},{sub:'15개씩 보기', val:'15'}],(i,j)=>{
+				$('<option value='+j.val+'>'+j.sub+'</option>')
 				.appendTo('#paging_form select')
 			})
-			
-			let t = ''
-			let i = 0
+			$('#paging_form option[value="'+d.pxy.pageSize+'"]').attr('selected',true)
+			$('#paging_form').change(()=>{
+				recent_updates({page: '1', size:$('#paging_form option:selected').val()})
+			})
+			if(d.pxy.existPrev)		{
+				$('<li class="page-item"><a class="page-link" href="#">'+'이전'+'</a></li>')
+				.appendTo('#pagination')
+			}
 			$.each(d.pages,(i,j)=>{
 				$('<li class="page-item"><a class="page-link" href="#">'+j+'</a></li>')
 				.appendTo('#pagination')
-				$('#pagination')
-				.css({'place-content':'center'})
+				.click(()=>{
+					recent_updates({page: j, size:$('#paging_form option:selected').val()})
+				})
 			})
-					
+			if(d.pxy.existNext){
+				$('<li class="page-item"><a class="page-link" href="#">'+'다음'+'</a></li>')
+				.appendTo('#pagination')
+			}	
+			$('#pagination')
+			.css({'place-content':'center'})
 		})
 	}
 	let write=()=>{

@@ -3,7 +3,9 @@ package com.ship.web.pxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -21,6 +23,7 @@ import lombok.Data;
 @Component @Data @Lazy
 public class Proxy {
 	private int pageNum, pageSize, startRow, endRow;
+	private boolean existPrev, existNext;
 	private String search;
 	private final int BLOCK_SIZE = 5;
 	@Autowired Printer p;
@@ -37,10 +40,10 @@ public class Proxy {
 		endRow = (pageNum==pageCount) ? totalCount -1 : startRow + pageSize -1;
 		int blockCount = (pageCount%BLOCK_SIZE == 0) ? pageCount/BLOCK_SIZE : (pageCount/BLOCK_SIZE)+1;
 		int blockNum = (pageNum-1)/BLOCK_SIZE;
-		int startPage = ((blockNum-1)*BLOCK_SIZE)+1;
-		//int endPage = (blockNum!=blockCount) ? BLOCK_SIZE*blockNum : ;
-		boolean existPrev = false;
-		boolean existNext = false;
+		int startPage = blockNum*BLOCK_SIZE+1;
+		int endPage = ((blockNum+1)!=blockCount) ? BLOCK_SIZE*(blockNum+1) : pageCount;
+		existPrev = (blockNum != 0) ;
+		existNext = (blockNum != (blockCount -1)) ;
 		
 	}
 	public int parseInt(String param) {
@@ -65,7 +68,11 @@ public class Proxy {
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
-		
 		return proxyList;
 	}
+	public int random(int a, int b) {
+		BiFunction<Integer, Integer, Integer> f = (c,d) -> (int) (Math.random()*(d-c))+c;
+		return f.apply(a,b);
+	}
+
 }
