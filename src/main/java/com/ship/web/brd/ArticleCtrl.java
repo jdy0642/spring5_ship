@@ -53,7 +53,7 @@ public class ArticleCtrl {
 		list.clear();
 		ISupplier<List<Article>> s = () -> articleMapper.selectList(pxy);
 		printer.accept("해당 페이지\n"+s.get());
-		map.accept(Arrays.asList("articles","pages", "pxy"), Arrays.asList(s.get(),Arrays.asList(1,2,3,4,5),pxy));
+		map.accept(Arrays.asList("articles", "pxy"), Arrays.asList(s.get(),pxy));
 		return map.get();
 	}
 	@PutMapping("/{artseq}")
