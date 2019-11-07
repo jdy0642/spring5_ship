@@ -62,6 +62,7 @@ brd = (()=>{
 					detail(j)
 				})
 			})
+			//
 				let pxy = d.pxy
 			$(page_vue.page())
 				.appendTo('#recent_updates')
